@@ -16,10 +16,10 @@ $icons: logo, search, link, fav, trash, max, close, download, facebook, instagra
 =mode($color: $color, $bg_color:$bg_color)
 	color: $color
 	background-color: $bg_color
-=normalize($m:0, $b:0, $p: 1rem)
-	margin: $m
-	border: $b
-	padding: $p
+=normalize($m:0, $b:0, $p: 1rem, $ba: border, $ma: margin, $pa: padding)
+	#{$ma}: $m
+	#{$ba}: $b
+	#{$pa}: $p
 =flexbox($fd: row, $fj: space-between, $fa: center, $fw: wrap, $f: flex)
 	display: $f
 	flex-direction: $fd
@@ -33,6 +33,11 @@ $icons: logo, search, link, fav, trash, max, close, download, facebook, instagra
 	bottom:$b
 	right:$r
 	z-index: $z
+=size($w: auto, $h: auto, $mw: auto, $mh: auto, $ws: min-width, $hs: min-height)
+	width: $w
+	height: $h
+	#{$ws}: $mw
+	#{$hs}: $mh
 /*content first*/
 *
 	box-sizing: border-box
@@ -49,9 +54,8 @@ body
 	cursor: pointer
 	display: inline-block
 	+normalize(.25rem,0,0)
+	+size(2rem, 2rem)
 	border-radius: .25rem
-	width: 2rem
-	height: 2rem
 	background-repeat: no-repeat
 	background-position: center
 	background-size: contain
@@ -83,10 +87,9 @@ body
 /*barra de navegacion*/
 nav
 	+mode
-	+normalize($p: .5rem 0)
+	+normalize(0, .2rem solid $color, .5rem 0, border-top)
 	+flexbox
 	+position(sticky, 3, 0)
-	border-top: .2rem solid $color
 	@media screen and (min-width: $md)
 		padding: .2rem 1rem
 		#menu
@@ -95,8 +98,7 @@ nav
 		justify-content: space-around
 	.icon
 		+normalize(0 .5rem)
-		width: 3rem
-		height: 3rem
+		+size(3rem, 3rem)
 	#menu
 		+mode
 		+normalize($p:0)
@@ -107,20 +109,20 @@ nav
 		+mode($bg_color, $color)
 		+normalize
 		+position(fixed, $t:4.2rem)
+		+size(100%, 100vh)
 		overflow: hidden
 		display: none
-		width: 100%
-		height: 100vh
 		list-style: none
 		text-align: center
 		@media screen and (min-width: $md)
 			+normalize($p:0)
+			+size
 			position: static
 			display: flex
-			width: auto
-			height: auto
 			background-color: transparent
 		li
+			+normalize($p: .5rem 0)
+			position: relative
 			@media screen and (min-width: $md)
 				border-bottom: .2rem solid transparent
 				&:not(:last-child):hover
@@ -135,37 +137,34 @@ nav
 				font-weight: bold
 				@media screen and (min-width: $md)
 					+mode($color, transparent)
-				&::after
-					+normalize(1rem 0 0, none, 0)
-					content: ''
-					display: block
-					width: 60%
-					height: 1px
-					background-color: $bg_color
-					@media screen and (min-width: $md)
-						display: none
 			/*modo diurno / nocturno */
-			&:first-child
-				label
-					display: inline-block
-					+mode
-					+normalize($p: .5rem 1rem)
-					font-weight: bold
-					cursor: pointer
-					background-color: transparent
-					&:after
-						content:' Nocturno'
+			label
+				display: inline-block
+				+mode($bg_color, transparent)
+				+normalize($p: .5rem 1rem)
+				font-weight: bold
+				cursor: pointer
+				@media screen and (min-width: $md)
+					+mode($color, transparent)
+				&:after
+					content:' Nocturno'
+			label::before, 
+			&:not(:last-child) a::after
+				content: ''
+				+position($b: 0, $l: calc(50% - 20px))
+				+size(40px, 1px)
+				background-color: $bg_color
+				@media screen and (min-width: $md)
+					display: none
 			/*crear gifo*/
 			&:last-child
 				a
 					+normalize($p: .25rem)
-					display: none
 					border-radius: 50%
 					width: 2.25rem
 					font-size: 1.5rem
 					text-align: center
 					@media screen and (min-width: $md)
-						display: block
 						&:hover
 							+mode($bg_color, $color)
 				&.active a
@@ -176,8 +175,7 @@ nav
 		opacity: .8
 		@media screen and (min-width: $md)
 			display: flex
-			padding: 0
-			
+			padding: 0		
 /*cabecera*/
 #header	
 	+mode
@@ -187,10 +185,9 @@ nav
 		+normalize(auto, none, .2rem 3rem)
 		max-width: $sm
 	img 
-		+normalize(auto, none, 0 1rem)
 		display: block
-		width: 100%
-		max-width: $sm * 3/4
+		+normalize(auto, none, 0 1rem)
+		+size(100%, $ws: max-width, $mw: $sm * 3/4)
 	/*formulario de busqueda*/
 	form
 		+normalize(auto, none, 0 1rem)
@@ -219,16 +216,14 @@ nav
 					height: auto
 					padding: 0 .5rem .5rem
 					&:before
-						width: 90%
-						height: 1px
+						+size(90%, 1px)
 						background-color: darken($bg_color, 20%)
 				& ~ button
 					right: calc(100% - 4rem)
 		/*estilos del campo*/
 		::-webkit-search-cancel-button
 			-webkit-appearance: none
-			width: 1.5rem
-			height: 1.5rem
+			+size(1.5rem, 1.5rem)
 			background: url($icon+"icon_close.svg") no-repeat center
 		/*campo de sugerencias*/
 		#suggestion
@@ -243,11 +238,10 @@ nav
 				border-radius: .25rem
 				background: url($icon+"icon_search.svg") no-repeat left
 			&:before
-				+normalize(.2rem auto, none, 0)
 				content: ''
 				display: block
-				width: 0
-				height: 0
+				+normalize(.2rem auto, none, 0)
+				+size(0,0)
 			&:focus
 				overflow: auto
 				height: auto
@@ -256,18 +250,16 @@ nav
 				padding: 0 .5rem .5rem
 				+mode($color, lighten($bg_color, 30%)) 
 				&:before
-					width: 90%
-					height: 1px
+					+size(90%, 1px)
 					background-color: $color
 		/*boton buscar*/	
 		button
 			+position($t: .2rem, $r: 1.25rem)
-			width: 1.5rem
-			height: 1.5rem
+			+size(1.5rem, 1.5rem)
 		label
+			display: none
 			+mode(darken($bg_color, 20%), transparent)
 			+position($t: .5rem, $l: 4rem)
-			display: none
 			font-size: .8rem
 			@media screen and (min-width: $sm)
 				font-size: 1rem
@@ -332,29 +324,21 @@ main
 			display: none
 	/*creacion gif*/
 	#crear_gifo:target
-		overflow: hidden
 		+normalize(auto, 0, 0)
 		+flexbox(column, center)
-		height: 0
 		header
 			+mode($bg_color, transparent)
 		@media screen and (min-width: $md)
-			height: auto
 			.camera
 				+position($l: -30%)
-				width: 20vw
-				min-width: 4rem
-				max-width: 10rem
-				height: 8rem
+				+size(20vw, 8rem, 4rem, 10rem, $hs: max-width)
 				background: $camera
 				background-size: 70%, 45%
 				@media screen and (min-width: $lg)
 					left: -35%
 			.tape
-				+position($b: -10%, $r: -22.5%)
-				min-width: 2rem
-				max-width: 4rem
-				height: 4rem
+				+position($r: -22.5%)
+				+size(20vw, 10vh, 2rem, 6rem, $hs: max-width)
 				background: $tape
 				background-size: contain
 				@media screen and (min-width: $lg)
@@ -363,60 +347,59 @@ main
 		article
 			+mode($color, transparent)
 			+normalize(auto, 1px solid $color, 1.5rem)
+			+size(60%, $mw: 540px, $mh: 240px, $ws: max-width)
 			overflow: visible
 			position: relative
-			width: 60%
-			max-width: 540px
-			min-height: 320px
-			img,
-			video, 
-			.message
-				+position(absolute, 2, 10%, 15%, 10%, 15%)
-				width: 70% !important
-				height: 80%
-				opacity: 0
-			.message
-				+mode($color, $bg_color)
-				display: grid
-				justify-content: center
-				align-content: center
-				h1
-					+normalize
-					font-size: 1.5rem
-					line-height: 1.5rem
-					display: inline-block
-				p
-					+normalize($p: 0)
-					font-size: .9rem
-				.loader::before
-					content: url($icon+'loader.svg')
-					display: block
-					animation: load 2.5s linear infinite
-					@keyframes load
-						to
-							transform: rotate(360deg)
-				.check::before
-					content: url($icon+'check.svg')
-				&.active
-					+mode($bg_color, $color)
-					opacity: .75 !important
-				.hidden
-					+position($t: 0, $b: 0)
-					width: 100% !important
-					.social
-						text-align: right
-						.icon
-							+normalize(.25rem, 0, 0)
-							width: 2rem
-							border-radius: .25rem
-		&:target
-			display: flex
-		& div:last-child
-			width: 62.5%
-			max-width: 720px
+			@media screen and (min-width: $md)
+				min-height: 320px
+		img,
+		video, 
+		.message
+			+position(absolute, 2, 10%, 15%, 10%, 15%)
+			+size(70% !important, 80%)
+			opacity: 0
+		.message
+			+mode($color, $bg_color)
+			display: grid
+			justify-content: center
+			align-content: center
+			overflow-y: auto
+			overflow-x: hidden
+			h1
+				+normalize
+				font-size: 1.25rem
+				line-height: 1.25rem
+				display: inline-block
+			p
+				+normalize($p: 0)
+				font-size: .9rem
+			.loader::before
+				content: url($icon+'loader.svg')
+				display: block
+				animation: load 2.5s linear infinite
+				@keyframes load
+					to
+						transform: rotate(360deg)
+			.check::before
+				content: url($icon+'check.svg')
+			&.active
+				+mode($bg_color, $color)
+				opacity: .75 !important
+			.hidden
+				+position($t: 0, $b: 0)
+				width: 100% !important
+				.social
+					text-align: right
+					.icon
+						+normalize(.25rem, 0, 0)
+						width: 2rem
+						border-radius: .25rem
+		& > div:last-child
+			overflow: visible
+			+size(62.5%, $mw:720px, $ws: max-width)
 		/*area de proceso*/
 		.menu
-			+flexbox($fj:center)
+			+flexbox(column, center)
 			position: relative
 			border-bottom: .3rem solid $color
 			ul
@@ -429,7 +412,8 @@ main
 				border-radius: 50%
 				font: 1rem sans-serif
 			a
-				+position($z: 2, $r: 3%)
+				display: block
+				+position(absolute, 2, $r: 3%)
 				@media screen and (min-width:$lg)
 					right: 6%
 			.active
@@ -476,9 +460,6 @@ main
 			gap: .5rem
 		.noItems
 			display: block
-		&:target  #search
-			height: 0
-			overflow: hidden
 	/*gifs populares*/
 	#trending > div
 		overflow: auto
@@ -492,10 +473,9 @@ main
 	/*elementos independientes*/
 	article:not(.active)
 		+flexbox($fj: center)
+		+size($mw: 300px, $mh: 200px, $ws: max-width, $hs: max-height)
 		overflow: hidden
 		position: relative
-		max-width: 300px
-		max-height: 200px
 		margin: .5rem
 		background-color: darken($bg_color, 100%)
 		.hidden
@@ -511,14 +491,12 @@ main
 				.max
 					margin: 0
 					+position($z: -1, $t: -1rem, $r: -2rem)
-					width: 300px
-					height: 250px
+					+size(300px, 250px)
 					opacity: 0
 					@media screen and (min-width: $md)
 						position: static
 						margin: .25rem
-						width: 2rem
-						height: 2rem
+						+size(2rem, 2rem)
 						opacity: 1
 				a
 					+position(relative, 2)
@@ -535,40 +513,37 @@ main
 		+mode
 		+flexbox(column, center)
 		+position(fixed, 3, 0, 0)
-		width: 100vw
-		height: 100vh
+		+size(100vw, 100vh)
 		img
 			+normalize(4.2rem auto .5rem, 0, .5rem)
-			position: relative
-			max-width: 480px
-			max-height: 360px
+			+size(90%, $mw: 480px, $mh: 360px, $ws: max-width, $hs: max-height)
+		p
+			width: 60%
 		.hidden
 			+normalize(.5rem, none, .5rem)
 			+flexbox
+			+size(90%, $mw: 480px, $ws: max-width)
 			position: static
-			width: 100%
-			max-width: 480px
 			text-align: left
 			.close
 				+position(fixed, $t:1rem, $r:1rem)
 	video, 
 	img
-		height: 100%
+		+size($h: 100%)
 	/*localStorage*/
 	.fav.active
 		background: url($icon+"icon_fav_active.svg") no-repeat center, radial-gradient($bg_color, darken($bg_color, 20%)) !important
 		background-size: 1.25rem !important
 #footer
 	+mode(darken($color, 50%), $bg_color)
-	+normalize
-	border-bottom: .2rem solid $color
+	+normalize(0, .2rem solid $color, 1rem, border-bottom)
 	text-align: center
 	a
 		+mode(darken($color, 20%), transparent)
 		font-weight: bold
 	/*redes sociales*/
 	.social
-		margin: 3rem auto
+		+normalize(3rem auto, 0, .5rem)
 		@media screen and (min-width: $md)
 			+flexbox
 			margin: 0
