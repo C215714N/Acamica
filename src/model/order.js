@@ -23,7 +23,8 @@ let dbConn = require(`../middleware/dbConn`);
     Order.list = (result) => {
         dbConn.query(`SELECT * FROM orders AS o 
             JOIN orders_detail AS od 
-            ON od.id_order = o.id_order`, 
+            ON od.id_order = o.id_order
+            ORDER BY o.id_order DESC`, 
         (err, res) => (err) ? result(null, err) : result(null, res)
     )   } 
     Order.find = (id, result) => {

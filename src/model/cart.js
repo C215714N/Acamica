@@ -1,7 +1,6 @@
 let dbConn = require(`../middleware/dbConn`);
 /* Cart model constructor */
     let Cart = function(cart) {
-        this.id_user    =   cart.id_user
         this.id_product =   cart.id_product
         this.quantity   =   cart.quantity
     }
@@ -21,11 +20,10 @@ let dbConn = require(`../middleware/dbConn`);
         id, (err, res) => err ? result(err, null) : result(null, res)
     )   }
     Cart.update = (id, product, result) => {
-        dbConn.query(`UPDATE Cart SET ?, price = (
-                SELECT price FROM products 
-                WHERE id_product = ${product.id_product}
-            ) WHERE id_user = ? AND id_product = ?`,
-        [product, id, product.id_product], (err, res) => err ? result(err, null) : result(null, res)
+        dbConn.query(`UPDATE Cart SET ?, price = 
+            ( SELECT price FROM products WHERE id_product = ? ) 
+            WHERE id_user = ? AND id_product = ?`,
+        [ product, product.id_product, id, product.id_product ], (err, res) => err ? result(err, null) : result(null, res)
     )   }
     Cart.delete = (id, product, result) => {
         dbConn.query(`DELETE FROM Cart 
