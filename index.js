@@ -205,7 +205,7 @@
                 "Users"
                 ],
                 "summary": "List All [admin]",
-                "operationId": "ListAll[admin]",
+                "operationId": "User.list",
                 "produces": [
                 "application/json"
                 ],
@@ -313,7 +313,7 @@
                 "Users"
                 ],
                 "summary": "Find (:id / username / email)",
-                "operationId": "Find(:id/username/email)",
+                "operationId": "User.find",
                 "produces": [
                 "application/json"
                 ],
@@ -344,7 +344,7 @@
                 "Users"
                 ],
                 "summary": "Edit (:id / username / email)",
-                "operationId": "Edit(:id/username/email)",
+                "operationId": "User.update",
                 "consumes": [
                 "application/x-www-form-urlencoded"
                 ],
@@ -423,7 +423,7 @@
                 ],
                 "summary": "Remove (:id / username)",
                 "description": "Eliminar Producto",
-                "operationId": "Remove(:id/username)",
+                "operationId": "User.delete",
                 "produces": [
                 "application/json"
                 ],
@@ -457,7 +457,7 @@
                 "Products"
                 ],
                 "summary": "List All",
-                "operationId": "ListAll",
+                "operationId": "Product.list",
                 "produces": [
                 "application/json"
                 ],
@@ -483,7 +483,7 @@
                 "Products"
                 ],
                 "summary": "Add New [admin]",
-                "operationId": "PostAddNew[admin]",
+                "operationId": "Product.create",
                 "consumes": [
                 "application/x-www-form-urlencoded"
                 ],
@@ -551,7 +551,7 @@
                 ],
                 "summary": "Search (:id / prod)",
                 "description": "Usuario especifico",
-                "operationId": "Search(:id/prod)",
+                "operationId": "Product.find",
                 "produces": [
                 "application/json"
                 ],
@@ -583,7 +583,7 @@
                 "Products"
                 ],
                 "summary": "Edit (:id / prod)[admin]",
-                "operationId": "Edit(:id/prod)[admin]",
+                "operationId": "Product.update",
                 "consumes": [
                 "application/x-www-form-urlencoded"
                 ],
@@ -654,7 +654,7 @@
                 "Products"
                 ],
                 "summary": "Remove (:id / prod)[admin]",
-                "operationId": "Remove(:id/prod)[admin]",
+                "operationId": "Product.delete",
                 "produces": [
                 "application/json"
                 ],
@@ -689,7 +689,7 @@
                 ],
                 "summary": "List Cart [admin]",
                 "description": "localhost:5000/cart/",
-                "operationId": "ListCart[admin]",
+                "operationId": "Cart.list",
                 "produces": [
                 "application/json"
                 ],
@@ -715,7 +715,7 @@
                 "Cart"
                 ],
                 "summary": "Add Product (:id / +prod)",
-                "operationId": "AddProduct(:id/+prod)",
+                "operationId": "Cart.create",
                 "consumes": [
                 "application/x-www-form-urlencoded"
                 ],
@@ -770,7 +770,7 @@
                 "Cart"
                 ],
                 "summary": "User Cart (:id / username)",
-                "operationId": "UserCart(:id/username)",
+                "operationId": "Cart.find",
                 "produces": [
                 "application/json"
                 ],
@@ -802,7 +802,7 @@
                 "Cart"
                 ],
                 "summary": "Edit Cart (:id / +prod)",
-                "operationId": "EditCart(:id/+prod)",
+                "operationId": "Cart.update",
                 "consumes": [
                 "application/x-www-form-urlencoded"
                 ],
@@ -845,7 +845,7 @@
                 "Cart"
                 ],
                 "summary": "Rem Product (:id / +prod)",
-                "operationId": "RemProduct(:id/+prod)",
+                "operationId": "Cart.delete",
                 "consumes": [
                 "application/x-www-form-urlencoded"
                 ],
@@ -890,7 +890,7 @@
                 "Orders"
                 ],
                 "summary": "User Order (:id)",
-                "operationId": "UserOrder(:id)",
+                "operationId": "Order.list",
                 "produces": [
                 "application/json"
                 ],
@@ -922,7 +922,7 @@
                 "Orders"
                 ],
                 "summary": "Create Order ( +cart)",
-                "operationId": "CreateOrder(+cart)",
+                "operationId": "Order.create",
                 "consumes": [
                 "application/x-www-form-urlencoded"
                 ],
@@ -968,7 +968,7 @@
                 ],
                 "summary": "List All [admin]",
                 "description": "localhost:5000/orders",
-                "operationId": "GetListAll[admin]",
+                "operationId": "Order.list",
                 "produces": [
                 "application/json"
                 ],
@@ -996,7 +996,7 @@
                 "Orders"
                 ],
                 "summary": "Update Order (:id +state)[admin]",
-                "operationId": "UpdateOrder(:id+state)[admin]",
+                "operationId": "Order.update",
                 "consumes": [
                 "application/x-www-form-urlencoded"
                 ],
@@ -1039,7 +1039,7 @@
                 "Orders"
                 ],
                 "summary": "Delete Order (:id)[admin]",
-                "operationId": "DeleteOrder(:id)[admin]",
+                "operationId": "Order.delete",
                 "produces": [
                 "application/json"
                 ],
