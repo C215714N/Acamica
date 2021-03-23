@@ -5,11 +5,12 @@ let dbConn = require(`../middleware/dbConn`);
         this.quantity   =   cart.quantity
     }
 /* MySQL cart methods (query, params, callback) */
-    Cart.create = (newCart, result) => {
-        dbConn.query( `INSERT INTO Cart SET ?, 
+    Cart.create = (id, newCart, result) => {
+        dbConn.query( `INSERT INTO Cart SET ?,
+            id_user = ?,
             price = (SELECT price FROM products 
-            WHERE id_product = ${newCart.id_product})`,
-        newCart, (err, res) => err ? result(err, null) : result(null, res)
+            WHERE id_product = ?)`,
+        [ newCart, id, newCart.id_product ], (err, res) => err ? result(err, null) : result(null, res)
     )   }
     Cart.list = (result) => {
         dbConn.query(`SELECT * FROM Cart`, 

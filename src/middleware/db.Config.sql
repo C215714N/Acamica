@@ -4,72 +4,72 @@ USE Delilah;
 
 /* Data definition language */
     CREATE TABLE IF NOT EXISTS Users (
-        id_user INT AUTO_INCREMENT,
-        name VARCHAR(50) NOT NULL,
-        user VARCHAR(20) NOT NULL,
-        email VARCHAR(100) NOT NULL,
-        pass VARCHAR(20) NOT NULL,
-        phone int(10) NOT NULL,
-        address VARCHAR(200) NOT NULL,
-        date DATETIME DEFAULT CURRENT_TIMESTAMP,
-        admin BOOLEAN DEFAULT FALSE,
+        `id_user` INT AUTO_INCREMENT,
+        `name` VARCHAR(50) NOT NULL,
+        `user` VARCHAR(20) NOT NULL,
+        `email` VARCHAR(100) NOT NULL,
+        `pass` VARCHAR(20) NOT NULL,
+        `phone` int(10) NOT NULL,
+        `address` VARCHAR(200) NOT NULL,
+        `date` DATETIME DEFAULT CURRENT_TIMESTAMP,
+        `admin` BOOLEAN DEFAULT FALSE,
         PRIMARY KEY(id_user),
         UNIQUE KEY(user),
         UNIQUE KEY(email)
     );
     CREATE TABLE IF NOT EXISTS products (
-        id_product INT AUTO_INCREMENT,
-        name VARCHAR(50) NOT NULL,
-        detail VARCHAR(200),
-        price decimal(8,2) NOT NULL,
-        stock INT,
-        img VARCHAR(200),
-        date DATETIME DEFAULT CURRENT_TIMESTAMP,
+        `id_product` INT AUTO_INCREMENT,
+        `name` VARCHAR(50) NOT NULL,
+        `detail` VARCHAR(200),
+        `price` decimal(8,2) NOT NULL,
+        `stock` INT,
+        `img` VARCHAR(200),
+        `date` DATETIME DEFAULT CURRENT_TIMESTAMP,
         PRIMARY KEY(id_product),
         UNIQUE KEY(name)
     );
     CREATE TABLE IF NOT EXISTS states (
-        id_state INT AUTO_INCREMENT,
-        detail VARCHAR(50),
+        `id_state` INT AUTO_INCREMENT,
+        `detail` VARCHAR(50),
         PRIMARY KEY(id_state),
         UNIQUE KEY(detail)
     );
     CREATE TABLE IF NOT EXISTS pay_method (
-        id_method INT AUTO_INCREMENT,
-        detail VARCHAR(50),
+        `id_method` INT AUTO_INCREMENT,
+        `detail` VARCHAR(50),
         PRIMARY KEY(id_method),
         UNIQUE KEY(detail)
     );
     CREATE TABLE IF NOT EXISTS cart (
-        id_cart INT AUTO_INCREMENT,
-        id_user INT NOT NULL,
-        id_product INT NOT NULL,
-        quantity INT,
-        price DECIMAL(10,2),
+        `id_cart` INT AUTO_INCREMENT,
+        `id_user` INT NOT NULL,
+        `id_product` INT NOT NULL,
+        `quantity` INT,
+        `price` DECIMAL(10,2),
         PRIMARY KEY(id_cart),
         UNIQUE KEY(id_user, id_product),
         FOREIGN KEY(id_user) REFERENCES Users(id_user),
         FOREIGN KEY(id_product) REFERENCES products(id_product)
     );
     CREATE TABLE IF NOT EXISTS orders (
-        id_order INT AUTO_INCREMENT,
-        id_user INT NOT NULL,
-        id_state INT NOT NULL DEFAULT 1, 
-        id_method INT NOT NULL DEFAULT 1,
-        date DATETIME DEFAULT CURRENT_TIMESTAMP,
-        price decimal(8,2) NOT NULL,
-        pago BOOLEAN DEFAULT FALSE,
+        `id_order` INT AUTO_INCREMENT,
+        `id_user` INT NOT NULL,
+        `id_state` INT NOT NULL DEFAULT 1, 
+        `id_method` INT NOT NULL DEFAULT 1,
+        `date` DATETIME DEFAULT CURRENT_TIMESTAMP,
+        `price` decimal(8,2) NOT NULL,
+        `pago` BOOLEAN DEFAULT FALSE,
         PRIMARY KEY(id_order),
         FOREIGN KEY(id_user) REFERENCES Users(id_user),
         FOREIGN KEY(id_state) REFERENCES states(id_state),
         FOREIGN KEY(id_method) REFERENCES pay_method(id_method)
     );
     CREATE TABLE IF NOT EXISTS orders_detail (
-        id_detail INT AUTO_INCREMENT,
-        id_order INT,
-        id_product INT,
-        quantity INT,
-        price decimal(8,2) NOT NULL,
+        `id_detail` INT AUTO_INCREMENT,
+        `id_order` INT,
+        `id_product` INT,
+        `quantity` INT,
+        `price` decimal(8,2) NOT NULL,
         PRIMARY KEY(id_detail),
         UNIQUE KEY(id_order, id_product),
         FOREIGN KEY(id_order) REFERENCES orders(id_order),

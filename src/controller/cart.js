@@ -2,7 +2,7 @@ const Cart = require(`../model/cart`)
 /*  NodeJS cart handler methods */
     exports.create = function(req, res) {
         const newCart = new Cart(req.body)
-        Cart.create(newCart, (err, cart) => err ? res.send(err) : res.json( {
+        Cart.create(req.params.id, req.body, (err, cart) => err ? res.send(err) : res.json( {
             error : false,
             message : `Producto agregado al carrito.`,
             cart : cart

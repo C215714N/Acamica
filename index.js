@@ -181,14 +181,6 @@
                 "description": "",
                 "required": true,
                 "type": "string"
-            },
-            {
-                "name": "admin",
-                "in": "formData",
-                "description": "",
-                "required": true,
-                "type": "integer",
-                "format": "int32"
             }
             ],
             "responses": {
@@ -709,7 +701,9 @@
                 }
                 },
                 "deprecated": false
+            }
             },
+            "/cart/{id_user}": {
             "post": {
                 "tags": [
                 "Cart"
@@ -732,7 +726,7 @@
                 },
                 {
                     "name": "id_user",
-                    "in": "formData",
+                    "in": "path",
                     "description": "",
                     "required": true,
                     "type": "integer",
@@ -762,9 +756,7 @@
                 }
                 },
                 "deprecated": false
-            }
             },
-            "/cart/{id_user}": {
             "get": {
                 "tags": [
                 "Cart"
@@ -820,6 +812,12 @@
                 {
                     "name": "id_user",
                     "in": "path",
+                    "required": true,
+                    "type": "number"
+                },
+                {
+                    "name": "id_product",
+                    "in": "formData",
                     "required": true,
                     "type": "number"
                 },
