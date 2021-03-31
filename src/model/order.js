@@ -22,28 +22,23 @@ let dbConn = require(`../middleware/dbConn`);
     )   }   
     Order.list = (result) => {
         dbConn.query(`SELECT * FROM orders AS o 
-            JOIN orders_detail AS od 
-            ON od.id_order = o.id_order
+            JOIN orders_detail AS od ON od.id_order = o.id_order
             ORDER BY o.id_order DESC`, 
         (err, res) => (err) ? result(null, err) : result(null, res)
     )   } 
     Order.find = (id, result) => {
         dbConn.query(`SELECT * FROM orders AS o 
-            JOIN orders_detail AS od 
-            ON od.id_order = o.id_order 
-            WHERE id_user = ? 
-            ORDER BY o.id_order, od.id_detail DESC`, 
+            JOIN orders_detail AS od ON od.id_order = o.id_order 
+            WHERE id_user = ? ORDER BY o.id_order, od.id_detail DESC`, 
             id, (err, res) => (err) ? result(err, null) : result(null, res)
     )   }
     Order.update = (id, detail, result) => {
-        dbConn.query(`UPDATE orders SET id_state = ? 
-            WHERE id_order = ?`, 
+        dbConn.query(`UPDATE orders SET id_state = ? WHERE id_order = ?`, 
             [ detail, id ], (err, res) => (err) ? result(err, null) : result(null, res)
     )   }
     Order.delete = (id, result) => {
-        dbConn.query(`DELETE od FROM orders_detail od 
-            JOIN orders o ON od.id_order = o.id_order 
-            WHERE o.id_order = ?`, 
+        dbConn.query(`DELETE FROM orders_detail WHERE id_order = ?`, id )
+        dbConn.query(`DELETE FROM orders WHERE id_order = ?`,
             id, (err, res) => err ? result(err,null) : result(null, res) 
     )   }
 module.exports = Order;

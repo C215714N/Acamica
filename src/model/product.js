@@ -17,18 +17,15 @@ let dbConn = require(`../middleware/dbConn`);
         (err, res) => (err) ? result(null, err) : result(null, res)
     )   }
     Product.find   = (id, result) => {
-        dbConn.query( `SELECT * FROM products 
-            WHERE id_product = ? OR name LIKE ?`,
+        dbConn.query( `SELECT * FROM products WHERE id_product = ? OR name LIKE ?`,
         [id, `%`+id+`%`], (err, res) => (err) ? result(err, null) : result(null, res)
     )   }
     Product.update = (id, product, result) => {
-        dbConn.query( `UPDATE products SET ? 
-            WHERE id_product = ?`,
+        dbConn.query( `UPDATE products SET ? WHERE id_product = ?`,
         [ product, id ], (err, res) => (err) ? result(null, err) : result(null, res)
     )   }
     Product.delete = (id, result) => {
-        dbConn.query( `DELETE FROM products 
-            WHERE id_product = ?`,
+        dbConn.query( `DELETE FROM products WHERE id_product = ?`,
         id, (err, res) => (err) ? result(null, err) : result(null, res)
     )   }
 module.exports = Product

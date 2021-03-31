@@ -16,26 +16,22 @@ let dbConn = require(`../middleware/dbConn`);
     )   }
     User.list = (result) => {
         dbConn.query(`SELECT * FROM Users`, 
-        (err, res)=> (err) ? result(null, err) : result(null, res)
+        (err, res) => (err) ? result(null, err) : result(null, res)
     )   }
     User.login = (user, pass, result) => {
-        dbConn.query(`SELECT * FROM users 
-            WHERE user = ? AND pass = ?`,
+        dbConn.query(`SELECT * FROM users WHERE user = ? AND pass = ?`,
         [ user, pass ], (err, res) => (err) ? result(err, null) : result(null, res)
     )   }
     User.find = (id, result) => {
-        dbConn.query(`SELECT * FROM Users 
-            WHERE id_user = ? OR user = ?`, 
+        dbConn.query(`SELECT * FROM Users WHERE id_user = ? OR user = ?`, 
         [ id, id ], (err, res) => (err) ? result(err, null) : result(null, res)
     )   }
     User.update = (id, user, result) => {
-        dbConn.query(`UPDATE Users SET ? 
-            WHERE id_user = ?`, 
+        dbConn.query(`UPDATE Users SET ? WHERE id_user = ?`, 
         [ user, id ], (err, res) => (err) ? result(err, null) : result(null, res)
     )   }
     User.delete = (id, result) => {
-        dbConn.query(`DELETE FROM Users 
-            WHERE id_user = ? OR user = ?`, 
+        dbConn.query(`DELETE FROM Users WHERE id_user = ? OR user = ?`, 
         [ id, id ], (err, res) => (err) ? result(null, err) : result(null, res)
     )   }
 module.exports  = User
