@@ -28,8 +28,8 @@ class App extends Component{
         </header>
         <Login />
         <Nav links = {this.state.links}/> {/*Props*/}
-      <button onClick = {() => this.getData(`user`)}>Usuarios</button>
-      <button onClick = { () => this.getData(`company/${this.state.userId}`)}> Compañias</button>
+      <button onClick = {() => this.getData(`user/${this.state.userId}`)}>Usuarios</button>
+      <button onClick = { () => this.getData(`company/${this.state.userId}`)}> Compañías</button>
       <button onClick = {() => {this.getData(`contact/${this.state.userId}`)}}>Contactos</button>
       <Table data={this.state.userData}/>
       </>

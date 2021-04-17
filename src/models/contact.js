@@ -18,22 +18,22 @@ Contact.create = (id, newContact, result) => {
 Contact.read = (id, result) => {
     dbConn.query(
         `SELECT 
-            CONCAT(last_name," " ,first_name) AS Contacto,
-            CONCAT(country, " - ", region) AS "País/Región",
-            company AS Compañia,
-            position AS Puesto,
-            GROUP_CONCAT(channel) AS "Canal Preferido",
-            interest AS "Interés"
-                FROM contact_preferences AS cp
-                    JOIN contacts AS con ON con.id_contact = cp.id_contact
-                    JOIN companies AS com ON com.id_company = con.id_company
-                    JOIN users AS u ON u.id_user = com.id_user
-                    JOIN contact_channel AS cc ON cc.id_channel = cp.id_channel
-                    JOIN cities AS c ON c.id_city = con.id_city
-                    JOIN countries AS p ON p.id_country = c.id_country
-                    JOIN regions AS r ON r.id_region = p.id_region
-                GROUP BY cp.id_contact
-                ORDER BY last_name;`,
+            CONCAT(last_name," " ,first_name) AS Contactos,
+            CONCAT(country, " - ", region) AS "País / Región",
+            company AS Compañía,
+            position AS Cargo,
+            GROUP_CONCAT(channel) AS "Canal preferido",
+            interest AS Interés    
+        FROM contact_preferences AS cp
+            JOIN contacts AS con ON con.id_contact = cp.id_contact
+            JOIN companies AS com ON com.id_company = con.id_company
+            JOIN users AS u ON u.id_user = com.id_user
+            JOIN contact_channel AS cc ON cc.id_channel = cp.id_channel
+            JOIN cities AS c ON c.id_city = con.id_city
+            JOIN countries AS p ON p.id_country = c.id_country
+            JOIN regions AS r ON r.id_region = p.id_region
+        GROUP BY cp.id_contact
+        ORDER BY last_name;`,
 id, (err, res) => err ? result(err, null) : result(null, res)
 )}
 
