@@ -1,15 +1,10 @@
-import React from 'react';
-
-class Nav extends React.Component{
-    render() {
-        return (
-            <nav>
-                <ul>
-                    {this.props.links.map((link, index) =>
-                        <li key={index}>{link}</li>
-                    )}
-                </ul>
-            </nav>
-        )}}
-
+const Nav = (props) => { return (  
+    <nav>
+        <ul>
+            { props.links.map((link, index) =>  
+                <li key={index}><a href={link}>{link}</a></li>
+            ) }
+        </ul>
+    </nav>
+)   }
 export default Nav;
