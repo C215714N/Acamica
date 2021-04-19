@@ -1,10 +1,12 @@
-const Nav = (props) => { return (  
+const Nav = (props) =>{
     <nav>
-        <ul>
-            { props.links.map((link, index) =>  
-                <li key={index}><a href={link}>{link}</a></li>
-            ) }
-        </ul>
+        <h1>Data Warehouse</h1>        
+        <Links links={props.links} />
     </nav>
-)   }
+}
+const Links = (props) => {
+    <ul className="menu">
+        { props.links.map( (link, i) => <li key={i}>{link} </li> ) }
+    </ul>
+}
 export default Nav;
