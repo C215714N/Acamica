@@ -9,7 +9,7 @@ export const Thead = (props) => { return(
 )   }
 export const Tbody = (props) => { return(
     <tbody>
-    { props.data.map( (row, i) => 
+    {   props.data.map( (row, i) => 
         <tr key={i}> 
             <td><input type="checkbox" /></td>
             { Object.keys(row).map( ( key, id ) => <td key={id}>{row[key]}</td> ) } 

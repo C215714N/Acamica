@@ -1,20 +1,15 @@
-const Form = (props) => {
-    return(
-        props.data.formData ?
-        <form className="form">
-            <FormFields data={props.data.formData} />
-            <button type="reset">Cancelar</button>
-            <button>Enviar</button>
-        </form> :
-        null
-)}
-
-const FormFields = (props) => {
-    return(
-        props.data.map((field, i) => 
-            <div key={i}>
-                <label for={field.key}> {field.key}</label>
-                <input name={field.key} type={field.type} value={field.value || ''}/>
-            </div> 
-))}
-export default Form
+import { Actions } from './Actions'
+export const Form = (props) => { return(
+    props.data.formData ?
+    <form className="form" onSubmit={ (e) => { e.preventDefault() } }>
+        <FormFields data={props.data.formData} />
+        <Actions />
+    </form> : null
+)   }
+const FormFields = (props) => { return(
+    props.data.map((field, i) => 
+        <div key={i} className="field">
+            <label htmlFor={field.name}> {field.text}</label>
+            <input name={field.name} type={field.type} placeholder={field.value} required />
+        </div> 
+)   )   }
