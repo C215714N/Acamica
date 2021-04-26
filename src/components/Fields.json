@@ -3,14 +3,14 @@
         "title": "Iniciar Sesión",
         "formData": [
             {
-                "tag": "input",
+                
                 "name": "user_name",
                 "text": "usuario",
                 "placeholder": "jonathan_kim",
                 "type": "text"
             },
             {
-                "tag": "input",
+                
                 "name": "password",
                 "text": "contraseña",
                 "placeholder": "●●●●●",
@@ -19,38 +19,38 @@
         ]
     },
     "User": {
-        "title": "Creación/edición del usuario",
+        "title": "Creación y/o edición del usuario",
         "formData": [
             {
-                "tag": "input",
+                
                 "name": "id_role",
                 "text": "Role",
                 "placeholder": "1",
                 "type": "number"
             },
             {
-                "tag": "input",
+                
                 "name": "name",
                 "text": "nombre y apellido",
                 "placeholder": "Jonathan Kim",
                 "type": "text"
             },
             {
-                "tag": "input",
+                
                 "name": "user_name",
                 "text": "usuario",
                 "placeholder": "jonathankim",
                 "type": "text"
             },
             {
-                "tag": "input",
+                
                 "name": "password",
                 "text": "contraseña",
-                "placeholder": "12345678",
+                "placeholder": "●●●●●",
                 "type": "password"
             },
             {
-                "tag": "input",
+                
                 "name": "email",
                 "text": "correo electronico",
                 "placeholder": "user@server.com",
@@ -59,24 +59,22 @@
         ]
     },
     "Company": {
-        "title": "Creación/edición de la compañía",
+        "title": "Creación y/o edición de la compañía",
         "formData": [
             {
-                "tag": "input",
                 "name": "company",
                 "text": "compañia",
                 "placeholder": "SpaceX",
                 "type": "text"
             },
             {
-                "tag": "select",
                 "name": "id_city",
                 "text": "ciudad",
                 "placeholder": "Buenos Aires",
                 "type": "text"
             },
             {
-                "tag": "input",
+                
                 "name": "address",
                 "text": "direccion",
                 "placeholder": "Reserva Ecológica",
@@ -85,52 +83,53 @@
         ]
     },
     "Contact": {
-        "title": "Creación/edición del contacto",
+        "title": "Creación y/o edición del contacto",
         "formData": [
             {
-                "tag": "input",
+                
                 "name": "first_name",
                 "text": "nombre/s",
-                "placeholder": " Pepe",
+                "placeholder": "Data",
                 "type": "text"
             },
             {
-                "tag": "input",
+                
                 "name": "last_name",
                 "text": "apellido/s",
-                "placeholder": " Lui",
+                "placeholder": "Warehouse",
                 "type": "text"
             },
             {
-                "tag": "select",
+                
                 "name": "doc_type",
                 "text": "tipo doc.",
                 "placeholder": " 1",
                 "type": "text"
             },
             {
-                "tag": "input",
+                
                 "name": "doc_num",
                 "text": "documento",
                 "placeholder": "35.791.246",
                 "type": "text"
             },
             {
-                "tag": "input",
+                
                 "name": "position",
                 "text": "cargo",
                 "placeholder": " relative",
                 "type": "text"
             },
             {
-                "tag": "input",
+                
                 "name": "interest",
                 "text": "interés",
-                "placeholder": " 4",
+                "min": "0",
+                "max": "4",
                 "type": "range"
             },
             {
-                "tag": "select",
+                
                 "name": "id_city",
                 "text": "ciudad",
                 "placeholder": " 7308",
@@ -139,17 +138,17 @@
         ]
     },
     "Preference": {
-        "title": "Creación/edición de la preferencia",
+        "title": "Creación y/o edición de la preferencia",
         "formData": [
             {
-                "tag": "input",
+                
                 "name": "account",
                 "text": "cuenta",
                 "placeholder": "@fulanodetal",
                 "type": "text"
             },
             {
-                "tag": "select",
+                
                 "name": "preferencia",
                 "text": "canal preferido",
                 "placeholder": "3",
@@ -161,32 +160,23 @@
         "title": "Agregar/ Editar Paises y Regiones",
         "formData": [
             {
-                "tag": "select",
                 "name": "id_region",
-                "text": "region",
-                "placeholder": "SA",
-                "type": "text"
+                "text": "Región/Continente",
+                "list": "region",
+                "placeholder": "South America"
             },
             {
-                "tag": "input",
-                "name": "region",
-                "text": "continente",
-                "placeholder": "South America",
-                "type": "text"
-            },
-            {
-                "tag": "select",
                 "name": "id_country",
-                "text": "cod. pais",
-                "placeholder": "AR",
-                "type": "text"
+                "text": "País",
+                "list": "country",
+                "placeholder": "Argentina"
             },
             {
-                "tag": "input",
-                "name": "country",
-                "text": "país",
-                "placeholder": "Argentina",
-                "type": "text"
+                
+                "name": "id_city",
+                "text": "Ciudad",
+                "list": "city",
+                "placeholder": "Buenos Aires"
             }
         ]
     }

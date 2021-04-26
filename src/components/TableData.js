@@ -1,3 +1,4 @@
+import React, { useRef } from "react";
 export const Thead = (props) => { return( 
     <thead>
         <tr>
@@ -7,13 +8,15 @@ export const Thead = (props) => { return(
         </tr>
     </thead>
 )   }
-export const Tbody = (props) => { return(
+export const Tbody = (props) => {
+    const myRefs= useRef([]);
+    return(
     <tbody>
     {   props.data.map( (row, i) => 
-        <tr key={i}> 
-            <td><input type="checkbox" /></td>
+        <tr key={i} ref={(el) => (myRefs.current[i] = row)}> 
+            <td><input type="checkbox" onChange={ () => console.log(myRefs.current[i])}/></td>
             { Object.keys(row).map( ( key, id ) => <td key={id}>{row[key]}</td> ) } 
-            <td><button>...</button></td>
+            <td>...</td>
         </tr>
     )   }
     </tbody>
