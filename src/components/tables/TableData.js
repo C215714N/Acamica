@@ -14,7 +14,7 @@ export const Tbody = (props) => {
     <tbody>
     {   props.data.map( (row, i) => 
         <tr key={i} ref={(el) => (myRefs.current[i] = row)}> 
-            <td><input type="checkbox" onChange={ () => console.log(myRefs.current[i])}/></td>
+            <td><input type="checkbox" onChange={ (e) => props.action( e, myRefs.current[i] ) }/></td>
             { Object.keys(row).map( ( key, id ) => <td key={id}>{row[key]}</td> ) } 
             <td>...</td>
         </tr>

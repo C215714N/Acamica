@@ -1,16 +1,15 @@
 {
     "Login":{
         "title": "Iniciar Sesión",
+        "class":"access",
         "formData": [
             {
-                
                 "name": "user_name",
                 "text": "usuario",
                 "placeholder": "jonathan_kim",
                 "type": "text"
             },
             {
-                
                 "name": "password",
                 "text": "contraseña",
                 "placeholder": "●●●●●",
@@ -19,38 +18,35 @@
         ]
     },
     "User": {
-        "title": "Creación y/o edición del usuario",
+        "title": "Registro de Usuarios",
+        "class":"access",
         "formData": [
             {
-                
                 "name": "id_role",
-                "text": "Role",
-                "placeholder": "1",
+                "text": "Rol",
+                "placeholder": "standard",
+                "list": "roles",
                 "type": "number"
             },
             {
-                
                 "name": "name",
                 "text": "nombre y apellido",
                 "placeholder": "Jonathan Kim",
                 "type": "text"
             },
             {
-                
                 "name": "user_name",
                 "text": "usuario",
                 "placeholder": "jonathankim",
                 "type": "text"
             },
             {
-                
                 "name": "password",
                 "text": "contraseña",
                 "placeholder": "●●●●●",
                 "type": "password"
             },
             {
-                
                 "name": "email",
                 "text": "correo electronico",
                 "placeholder": "user@server.com",
@@ -59,7 +55,8 @@
         ]
     },
     "Company": {
-        "title": "Creación y/o edición de la compañía",
+        "title": "Gestión de Compañías",
+        "class":"form",
         "formData": [
             {
                 "name": "company",
@@ -74,7 +71,6 @@
                 "type": "text"
             },
             {
-                
                 "name": "address",
                 "text": "direccion",
                 "placeholder": "Reserva Ecológica",
@@ -83,45 +79,40 @@
         ]
     },
     "Contact": {
-        "title": "Creación y/o edición del contacto",
+        "title": "Administrar Contactos",
+        "class":"form",
         "formData": [
             {
-                
                 "name": "first_name",
                 "text": "nombre/s",
                 "placeholder": "Data",
                 "type": "text"
             },
             {
-                
                 "name": "last_name",
                 "text": "apellido/s",
                 "placeholder": "Warehouse",
                 "type": "text"
             },
             {
-                
                 "name": "doc_type",
                 "text": "tipo doc.",
                 "placeholder": " 1",
                 "type": "text"
             },
             {
-                
                 "name": "doc_num",
                 "text": "documento",
                 "placeholder": "35.791.246",
                 "type": "text"
             },
             {
-                
                 "name": "position",
                 "text": "cargo",
                 "placeholder": " relative",
                 "type": "text"
             },
             {
-                
                 "name": "interest",
                 "text": "interés",
                 "min": "0",
@@ -129,7 +120,6 @@
                 "type": "range"
             },
             {
-                
                 "name": "id_city",
                 "text": "ciudad",
                 "placeholder": " 7308",
@@ -138,17 +128,16 @@
         ]
     },
     "Preference": {
-        "title": "Creación y/o edición de la preferencia",
+        "title": "Preferencias de contacto",
+        "class":"form",
         "formData": [
             {
-                
                 "name": "account",
                 "text": "cuenta",
                 "placeholder": "@fulanodetal",
                 "type": "text"
             },
             {
-                
                 "name": "preferencia",
                 "text": "canal preferido",
                 "placeholder": "3",
@@ -157,7 +146,8 @@
         ]
     },
     "Region": {
-        "title": "Agregar/ Editar Paises y Regiones",
+        "title": "Paises y Regiones",
+        "class":"access",
         "formData": [
             {
                 "name": "id_region",
@@ -172,7 +162,6 @@
                 "placeholder": "Argentina"
             },
             {
-                
                 "name": "id_city",
                 "text": "Ciudad",
                 "list": "city",

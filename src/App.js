@@ -1,71 +1,66 @@
-import './App.css';
+import './App.css'
+import { Component } from 'react'
+import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom"
 import Fields from './components/Fields.json'
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
-import { Component } from 'react';
-import { Nav } from './components/Nav';
-import { Form } from './components/Form'
-import { Table } from './components/Table';
-import { Location } from './components/Location';
+import { Nav } from './components/Nav'
+import { Form } from './components/forms/Form'
+import { Search } from './components/tables/Search'
+
+let title = 'Data Warehouse'
+let server = `http://localhost:3200/`
+let links = [
+  { url: 'contact',
+    form: Fields.Contact,
+    text: 'Contactos'}, 
+  { url: 'company',
+    form: Fields.Company,
+    text:'Compañías'}, 
+  { url: 'user',
+    form: Fields.User,
+    text:'Usuarios'},
+  { url: 'region',
+    form: Fields.Region,
+    text:'Región/Ciudad'}
+  ]
+
 class App extends Component{
   constructor(props){
     super(props)
-      this.state = {
-        userId: 1,
-        userData: [],
-        links: [
-          { url: 'contact',
-            form: Fields.Contact,
-            text: 'Contactos'}, 
-          { url: 'company',
-            form: Fields.Company,
-            text:'Compañías'}, 
-          { url: 'user',
-            form: Fields.User,
-            text:'Usuarios'},
-          { url: 'region',
-            form: Fields.Region,
-            text:'Región/Ciudad'}
-        ],
-        form: Fields.Contact,
-        selection: []
+    this.state = {
+      userId: 1,
+      userData: [],
+      form: Fields.Contact,
+      selection: []
   } }
   getData = (url, state, field) => {
-    let server = `http://localhost:3200/`
     fetch(server + url)
       .then(response => response.json())
       .then(data => { this.setState( { 
-        [state]:  data || this.state[state], 
         userData: data || this.state[state],
-        form:    field ? field : this.state.userId ? Fields.Contact : Fields.Login
-      } ); console.log(this.state[state])
-  } ) }
-  dataSelect = (type, data) => { type ? this.setState( { selection: this.state.selection.push(data)} ) : this.setState( { selection: this.removeItem(this.state.selection, data) } ) }
-  removeItem = ( arr, item, i ) => { i = arr.indexOf( item ); arr.splice( i, 1 ) }
+        [state]:  data || this.state[state], 
+        form: field || Fields.Contact
+  } ) } ) }
+  dataSelect = (type, data) => { 
+    type ? this.setState( { selection: [ ...this.state.selection, data ] } ) : 
+    this.setState( { selection: this.removeItem(this.state.selection, data) } )
+    }
+  removeItem = ( arr, item, i ) => i = arr.indexOf( item ) && arr.splice( i, 1 )
+  
   render(){
-    return(
+    return( 
       <Router>
-        <Switch>
-          <Route exact path="/">
-            <main>
-              <Form data={ Fields.Login } cancel="Registrarse" success="Iniciar Sesion" />
-            </main>
-          </Route>
-          <Route exact path="/register">
-            <main>
-              <Form title={'Registro de Usuario'} data={ Fields.User } />
-            </main>
-          </Route>
-          <Route exact path="/home">
-            <>
-              <Nav id={ this.state.userId } action={ this.getData } links = { this.state.links } />
-              <main>
-                <Form class={'form'} data={ this.state.form }/>
-                <Table data={ this.state.userData } />
-              </main>
-            </>
-          </Route>
-        </Switch>
+        <Nav id={ this.state.userId } title={ title } action={ this.getData } links={ links } />
+        <main>
+          <Switch>
+            <Route exact path="/">
+              <Form data={ Fields.Login } action={ Fields.Login.action } />
+            </Route>
+            <Route default>
+              { this.state.userId ? <Search data={ this.state } action={ this.dataSelect} /> : <Redirect to="/" /> } 
+            </Route>
+          </Switch>
+        </main>
       </Router>
     )}
 }
